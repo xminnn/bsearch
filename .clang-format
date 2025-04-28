@@ -1,0 +1,142 @@
+# 文档： https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+# 使用以下两个注释可以取消部分代码的格式化:
+#    // clang-format off
+#    // clang-format on
+# 手动格式化使用: 在项目根目录下 clang-format -i <file>
+# vscode 添加配置 "editor.formatOnSave": true
+
+Language: Cpp
+
+DisableFormat: false
+Cpp11BracedListStyle: true
+Standard: Latest
+UseTab: Never
+AccessModifierOffset: 0
+PointerAlignment: Left ## * 号位置
+
+## 对其
+AlignAfterOpenBracket: DontAlign
+AlignConsecutiveAssignments: false
+AlignConsecutiveMacros: false
+AlignConsecutiveDeclarations: false
+AlignEscapedNewlines: Left
+AlignOperands: true
+AlignTrailingComments: true
+AlignArrayOfStructures: Left
+
+AllowAllArgumentsOnNextLine: true
+AllowAllConstructorInitializersOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: true
+AllowShortBlocksOnASingleLine: false
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: All
+AllowShortLambdasOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: WithoutElse
+AllowShortLoopsOnASingleLine: false
+
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None
+AlwaysBreakBeforeMultilineStrings: true
+AlwaysBreakTemplateDeclarations: No
+
+BinPackArguments: false
+BinPackParameters: true
+
+BreakBeforeBinaryOperators: None
+BreakInheritanceList: BeforeColon
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializersBeforeComma: false
+BreakConstructorInitializers: BeforeColon
+BreakAfterJavaFieldAnnotations: false
+BreakStringLiterals: true
+
+## 大括号控制
+BreakBeforeBraces: Custom ## BraceWrapping 生效此配置必须是 Custom
+BraceWrapping:
+    SplitEmptyFunction: true
+    SplitEmptyRecord: true
+    SplitEmptyNamespace: true
+    AfterExternBlock: true
+    AfterFunction: false
+
+    AfterCaseLabel: false
+    AfterClass: false
+    AfterControlStatement: false
+    AfterEnum: false
+    AfterNamespace: false
+    AfterObjCDeclaration: false
+    AfterStruct: false
+    AfterUnion: false
+    BeforeCatch: false
+    BeforeElse: false
+    IndentBraces: false
+    BeforeLambdaBody: false
+
+## 缩进控制
+IndentCaseLabels: true
+IndentPPDirectives: None
+IndentWidth: 4
+NamespaceIndentation: All
+IndentWrappedFunctionNames: false
+ContinuationIndentWidth: 4
+ConstructorInitializerIndentWidth: 4
+
+## include的整理与排序
+IncludeBlocks: Regroup
+IncludeCategories:
+    - Regex: "^<ext/.*.h>"
+      Priority: 2
+    - Regex: "^<.*.h>"
+      Priority: 1
+    - Regex: "^<.*"
+      Priority: 2
+    - Regex: ".*"
+      Priority: 3
+SortIncludes: true
+SortUsingDeclarations: false
+IncludeIsMainRegex: "([-_](test|unittest))?$"
+
+## 限制
+PenaltyBreakAssignment: 4
+PenaltyBreakBeforeFirstCallParameter: 4
+PenaltyBreakComment: 300
+PenaltyBreakFirstLessLess: 120
+PenaltyBreakString: 1000
+PenaltyBreakTemplateDeclaration: 10
+PenaltyExcessCharacter: 1000000
+PenaltyReturnTypeOnItsOwnLine: 200
+
+## 空格
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceAfterTemplateKeyword: false
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCpp11BracedList: false
+SpaceBeforeCtorInitializerColon: false
+SpaceBeforeInheritanceColon: false
+SpaceBeforeParens: ControlStatements
+SpaceBeforeRangeBasedForLoopColon: true
+SpaceInEmptyParentheses: false
+SpacesBeforeTrailingComments: 4
+SpacesInAngles: Never
+SpacesInContainerLiterals: true
+SpacesInCStyleCastParentheses: false
+SpacesInParentheses: false
+SpacesInSquareBrackets: false
+
+# 其他
+ReflowComments: true
+ColumnLimit: 0
+CommentPragmas: "^ IWYU pragma:"
+CompactNamespaces: false
+DerivePointerAlignment: true
+ExperimentalAutoDetectBinPacking: false
+FixNamespaceComments: false
+MacroBlockBegin: ""
+MacroBlockEnd: ""
+KeepEmptyLinesAtTheStartOfBlocks: false
+MaxEmptyLinesToKeep: 1
+ForEachMacros:
+    - foreach
+    - Q_FOREACH
+    - BOOST_FOREACH
