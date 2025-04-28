@@ -21,24 +21,8 @@ int cmp_int(const void *a, const void *b);
 int cmp_2int(const void *a, const void *b);
 int cmp_3int(const void *a, const void *b);
 
-// 延迟删除时统一删除
 #define _concat_impl(a, b) a##b
 #define _concat(a, b) _concat_impl(a, b)
-#define remove_deleted(arr)                               \
-    do {                                                  \
-        int real_count = 0;                               \
-        for (int i = 0; i < _concat(arr, _count_); i++) { \
-            if (arr[i].deleted) {                         \
-                continue;                                 \
-            }                                             \
-            if (i != real_count) {                        \
-                arr[real_count++] = arr[i];               \
-            } else {                                      \
-                real_count++;                             \
-            }                                             \
-        }                                                 \
-        _concat(arr, _count_) = real_count;               \
-    } while (0);
 
 #define bsearch_put(arr, cmp, data) _bsearch_put(arr, sizeof(arr[0]), &_concat(arr, _count_), sizeof(arr) / sizeof(arr[0]), cmp, data)
 #define bsearch_get(arr, cmp, index) ((typeof(arr[0]) *)_bsearch_get(arr, sizeof(arr[0]), _concat(arr, _count_), cmp, index))
