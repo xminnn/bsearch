@@ -45,7 +45,6 @@ struct element {
 
 int main(int argc, char const* argv[]) {
     int count = argc > 1 ? atoi(argv[1]) : 100000;
-    int init_cap = argc > 2 ? atoi(argv[2]) : 6;
     int not_list_test = argc > 3 ? atoi(argv[3]) : 1;
 
     static struct element arr[10010000];
@@ -73,7 +72,7 @@ int main(int argc, char const* argv[]) {
             bsearch_put(data.logined_users, cmp_2int64, &arr[i]);
         }
         long long end = time_curruent_us();
-        printf("put time cost: %lldms, count=%lld. %gus/op\n", (end - start) / 1000, data.logined_users_count_, 1.0 * (end - start) / data.logined_users_count_);
+        printf("put time cost: %lldms, count=%d. %gus/op\n", (end - start) / 1000, data.logined_users_count_, 1.0 * (end - start) / data.logined_users_count_);
 
         start = time_curruent_us();
         bsearch_put(data.logined_users, cmp_2int64, &rand_put);

@@ -144,7 +144,6 @@ int bsearch_list_get_pos(struct bsearch_list* self, const void* data) {    // �
 }
 
 void* bsearch_list_get(struct bsearch_list* self, const void* data) {
-    int pos = 0;
     int lp = _binary_search(self->block, self->block_count_, sizeof(struct bsearch_list_block), block_get_cmpfunc_, &(struct block_find_compare_data_){self, data});
     if (lp < 0) {
         return 0;
@@ -161,11 +160,12 @@ static int bsearch_list_block_merge_(struct bsearch_list* self, int i, int p) {
         last->arr_count_ += block->arr_count_;
         free(block->arr);
         _bsearch_del_pos(self->block, sizeof(struct bsearch_list_block), &self->block_count_, p);
+        return 1;
     }
+    return 0;
 }
 
 int bsearch_list_del(struct bsearch_list* self, const void* data) {
-    int pos = 0;
     int lp = _binary_search(self->block, self->block_count_, sizeof(struct bsearch_list_block), block_get_cmpfunc_, &(struct block_find_compare_data_){self, data});
     if (lp < 0) {
         return -1;
@@ -180,7 +180,6 @@ int bsearch_list_del(struct bsearch_list* self, const void* data) {
     }
 
     if (lp - 1 >= 0) {    // 合并
-        const struct bsearch_list_block* last = &self->block[lp - 1];
         if (bsearch_list_block_merge_(self, lp - 1, lp)) {
             return ret;
         }
